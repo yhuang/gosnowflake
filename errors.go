@@ -119,6 +119,17 @@ const (
 	// ErrOCSPNoOCSPResponderURL is an error code for the case where the OCSP responder URL is not attached.
 	ErrOCSPNoOCSPResponderURL = 269004
 
+	/* Query Status*/
+
+	// ErrQueryStatus when check the status of a query, receive error or no status
+	ErrQueryStatus = 279001
+	// ErrQueryIDFormat the query ID given to fetch its result is not valid
+	ErrQueryIDFormat = 279101
+	// ErrQueryReportedError server side reports the query failed with error
+	ErrQueryReportedError = 279201
+	// ErrQueryIsRunning the query is still running
+	ErrQueryIsRunning = 279301
+
 	/* GS error code */
 
 	// ErrSessionGone is an GS error code for the case that session is already closed
@@ -127,6 +138,8 @@ const (
 	ErrRoleNotExist = 390189
 	// ErrObjectNotExistOrAuthorized is a GS error code for the case that the server-side object specified does not exist
 	ErrObjectNotExistOrAuthorized = 390201
+
+
 )
 
 const (

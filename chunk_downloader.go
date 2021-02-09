@@ -30,9 +30,9 @@ type chunkDownloader interface {
 	reset()
 	getChunkMetas() []execResponseChunk
 	getQueryResultFormat() resultFormat
+	getRowType() []execResponseRowType
 	setNextChunkDownloader(downloader chunkDownloader)
 	getNextChunkDownloader() chunkDownloader
-	getRowType() []execResponseRowType
 }
 
 type snowflakeChunkDownloader struct {
@@ -407,15 +407,16 @@ func populateJSONRowSet(dst []chunkRowType, src [][]*string) {
 }
 
 type streamChunkDownloader struct {
-	ctx            context.Context
-	id             int64
-	fetcher        streamChunkFetcher
-	readErr        error
-	rowStream      chan []*string
-	Total          int64
-	ChunkMetas     []execResponseChunk
-	NextDownloader chunkDownloader
-	RowSet         rowSetType
+	ctx            	context.Context
+	id             	int64
+	fetcher        	streamChunkFetcher
+	readErr        	error
+	rowStream      	chan []*string
+	Total          	int64
+	ChunkMetas     	[]execResponseChunk
+	NextDownloader 	chunkDownloader
+	Prev 			chunkDownloader
+	RowSet         	rowSetType
 }
 
 func (scd *streamChunkDownloader) totalUncompressedSize() (acc int64) {
